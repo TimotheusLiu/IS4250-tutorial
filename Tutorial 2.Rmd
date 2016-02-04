@@ -1,0 +1,68 @@
+---
+title: "Tutorial2"
+author: "Junxiong"
+date: "29 January 2016"
+output: html_document
+---
+
+```{r, message=FALSE,echo=FALSE}
+library(ggplot2)
+
+library(dplyr)
+```
+
+1ai)
+```{r, echo=FALSE}
+summarise(labs, avg = mean(WaitTime))
+count (labs, SvcSat)
+```
+
+1aii)
+```{r, echo=FALSE}
+ggplot(labs, aes(WaitTime)) + geom_bar()
+ggplot(labs, aes(SvcSat)) + geom_bar()
+```
+
+1b)
+```{r, echo=FALSE}
+ggplot(labs, aes(Gender, SvcSat)) + geom_count()
+ggplot(labs, aes(AGE, SvcSat)) + geom_count()
+```
+higher proportion of female is more satisfied than male
+people between age 20 to 40 are generally more satisfied with the service 
+
+1c)
+```{r, echo=FALSE}
+SvcStat <- as.numeric(labs$SvcSat)
+ggplot(labs, aes(SvcStat, WaitTime)) + geom_line()
+```
+The shorter the waiting time, the higher the probability of having a satisfied customer.
+
+1d)
+```{r, echo=FALSE}
+labs <- mutate(labs, BMI = WT/(HT*HT))
+ggplot(labs, aes(TC, BMI)) + geom_point()
+```
+The points are very spread out, therefore there is minimal correlation between BMI and Total cholestrol
+
+1e)
+```{r, echo=FALSE}
+labs <- mutate(labs, BMI = WT/(HT*HT))
+labs <- arrange(labs, AGE)
+labs <- select (labs, ETHNIC, AGE, SBP, TC, BMI) 
+
+```
+DO NOT KNOW HOW TO CONTINUE
+
+Page 9
+```{r, echo=FALSE}
+Diabetics_1 <- mutate (Diabetic, total = Present + Absent)
+Diabetics_2 <- mutate (Diabetics_1, Present_Per = Present/total * 100, Absent_Per = Absent/total * 100)
+ggplot(Diabetics_2, aes(Diabetic_control, Present_Per)) + geom_bar(stat = "identity")
+ggplot(Diabetics_2, aes(Diabetic_control, Absent_Per)) + geom_bar(stat = "identity")
+```
+a. Yes
+b. For good diabetics control, the rate of complications being absent is much higher than poor control. 
+c. A larger test group is needed
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
